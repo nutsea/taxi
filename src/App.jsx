@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import './styles/app.scss'
 import './styles/base.scss'
 
@@ -16,7 +16,69 @@ import telegram from './images/telegram.png'
 import car2 from './images/car2.png'
 import car3 from './images/car3.png'
 
+const classes = [
+    {
+        class: 'Стандарт',
+        cars: ['Lada Vesta, ', 'Lada Largus, ', 'Kia Rio, ', 'Skoda Rapid, ', 'Renault Logan, ', 'Hyundai Solaris'],
+        conditions: ['В машине 4 места']
+    },
+    {
+        class: 'Комфорт',
+        cars: ['Lada Vesta, ', 'Lada Largus, ', 'Kia Rio, ', 'Skoda Rapid, ', 'Renault Logan, ', 'Hyundai Solaris'],
+        conditions: ['В машине 4 места']
+    },
+    {
+        class: 'Комфорт+',
+        cars: ['Lada Vesta, ', 'Lada Largus, ', 'Kia Rio, ', 'Skoda Rapid, ', 'Renault Logan, ', 'Hyundai Solaris'],
+        conditions: ['В машине 4 места']
+    },
+    {
+        class: 'Бизнес',
+        cars: ['Lada Vesta, ', 'Lada Largus, ', 'Kia Rio, ', 'Skoda Rapid, ', 'Renault Logan, ', 'Hyundai Solaris'],
+        conditions: ['В машине 4 места']
+    },
+    {
+        class: 'Минивэн',
+        cars: ['Lada Vesta, ', 'Lada Largus, ', 'Kia Rio, ', 'Skoda Rapid, ', 'Renault Logan, ', 'Hyundai Solaris'],
+        conditions: ['В машине 4 места']
+    },
+    {
+        class: 'Бус-автобус',
+        cars: ['Lada Vesta, ', 'Lada Largus, ', 'Kia Rio, ', 'Skoda Rapid, ', 'Renault Logan, ', 'Hyundai Solaris'],
+        conditions: ['В машине 4 места']
+    },
+    {
+        class: 'Перегон авто',
+        cars: ['Lada Vesta, ', 'Lada Largus, ', 'Kia Rio, ', 'Skoda Rapid, ', 'Renault Logan, ', 'Hyundai Solaris'],
+        conditions: ['В машине 4 места']
+    },
+    {
+        class: 'Трезвый водитель',
+        cars: ['Lada Vesta, ', 'Lada Largus, ', 'Kia Rio, ', 'Skoda Rapid, ', 'Renault Logan, ', 'Hyundai Solaris'],
+        conditions: ['В машине 4 места']
+    },
+    {
+        class: 'Доставка',
+        cars: ['Lada Vesta, ', 'Lada Largus, ', 'Kia Rio, ', 'Skoda Rapid, ', 'Renault Logan, ', 'Hyundai Solaris'],
+        conditions: ['В машине 4 места']
+    },
+    {
+        class: 'Мини переезд',
+        cars: ['Lada Vesta, ', 'Lada Largus, ', 'Kia Rio, ', 'Skoda Rapid, ', 'Renault Logan, ', 'Hyundai Solaris'],
+        conditions: ['В машине 4 места']
+    },
+    {
+        class: 'Детский',
+        cars: ['Lada Vesta, ', 'Lada Largus, ', 'Kia Rio, ', 'Skoda Rapid, ', 'Renault Logan, ', 'Hyundai Solaris'],
+        conditions: ['В машине 4 места']
+    },
+]
+
 function App() {
+    const [rateClass, setRateClass] = useState(classes[0])
+    const [rateChosen, setRateChosen] = useState(false)
+    const [phoneNumber, setPhoneNumber] = useState()
+
     const chooseRate = (e) => {
         const rates = document.getElementsByClassName('Rate')
         for (let i of rates) {
@@ -24,6 +86,119 @@ function App() {
         }
         const btn = document.querySelector(`.Btn${e.target.id}`)
         btn.classList.add('Chosen')
+        setRateClass(classes[Number(e.target.id) - 1])
+        setRateChosen(true)
+    }
+
+    const handlePhoneChange = (e) => {
+        const input = e.target.value
+        const formattedNumber = formatPhoneNumber(input)
+        setPhoneNumber(formattedNumber)
+    }
+
+    const formatPhoneNumber = (input) => {
+        const cleaned = ('' + input).replace(/\D/g, '')
+        setPhoneNumber('7'+ cleaned)
+        const match = cleaned.match(/^(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})$/)
+        let formattedNumber
+        switch (cleaned.length) {
+            case 10:
+                formattedNumber = !match ? '' : `(${match[1]}) ${match[2]}-${match[3]}-${match[4]}`
+                break
+            case 9:
+                formattedNumber = !match ? '' : `(${match[1]}) ${match[2]}-${match[3]}-${match[4]}`
+                break
+            case 8:
+                formattedNumber = !match ? '' : `(${match[1]}) ${match[2]}-${match[3]}-`
+                break
+            case 7:
+                formattedNumber = !match ? '' : `(${match[1]}) ${match[2]}-${match[3]}`
+                break
+            case 6:
+                formattedNumber = !match ? '' : `(${match[1]}) ${match[2]}-`
+                break
+            case 5:
+                formattedNumber = !match ? '' : `(${match[1]}) ${match[2]}`
+                break
+            case 4:
+                formattedNumber = !match ? '' : `(${match[1]}) ${match[2]}`
+                break
+            case 3:
+                formattedNumber = !match ? '' : `(${match[1]}) `
+                break
+            case 2:
+                formattedNumber = !match ? '' : `(${match[1]}`
+                break
+            case 1:
+                formattedNumber = !match ? '' : `(${match[1]}`
+                break
+            case 0:
+                formattedNumber = !match ? '' : ``
+                break
+
+            default:
+                break
+        }
+    
+        return formattedNumber;
+    }
+
+
+    const handleBackspace = (e) => {
+        if (e.keyCode === 8 || e.key === 'Backspace') {
+            e.preventDefault()
+            const cleaned = ('' + e.target.value).replace(/\D/g, '')
+            const match = cleaned.split('')
+            let formattedNumber
+            switch (cleaned.length) {
+                case 10:
+                    formattedNumber = !match ? '' : 
+                    `(${match[0]}${match[1]}${match[2]}) ${match[3]}${match[4]}${match[5]}-${match[6]}${match[7]}-${match[8]}`
+                    break
+                case 9:
+                    formattedNumber = !match ? '' : 
+                    `(${match[0]}${match[1]}${match[2]}) ${match[3]}${match[4]}${match[5]}-${match[6]}${match[7]}-`
+                    break
+                case 8:
+                    formattedNumber = !match ? '' : 
+                    `(${match[0]}${match[1]}${match[2]}) ${match[3]}${match[4]}${match[5]}-${match[6]}`
+                    break
+                case 7:
+                    formattedNumber = !match ? '' : 
+                    `(${match[0]}${match[1]}${match[2]}) ${match[3]}${match[4]}${match[5]}-`
+                    break
+                case 6:
+                    formattedNumber = !match ? '' : 
+                    `(${match[0]}${match[1]}${match[2]}) ${match[3]}${match[4]}`
+                    break
+                case 5:
+                    formattedNumber = !match ? '' : 
+                    `(${match[0]}${match[1]}${match[2]}) ${match[3]}`
+                    break
+                case 4:
+                    formattedNumber = !match ? '' : 
+                    `(${match[0]}${match[1]}${match[2]}) `
+                    break
+                case 3:
+                    formattedNumber = !match ? '' : 
+                    `(${match[0]}${match[1]}`
+                    break
+                case 2:
+                    formattedNumber = !match ? '' : 
+                    `(${match[0]}`
+                    break
+                case 1:
+                    formattedNumber = !match ? '' : ``
+                    break
+                case 0:
+                    formattedNumber = !match ? '' : ``
+                    break
+
+                default:
+                    break
+            }
+            setPhoneNumber(formattedNumber)
+        }
     }
 
     return (
@@ -95,6 +270,25 @@ function App() {
                         <span className="RatePrice" id="11">от 99₽</span>
                     </button>
                 </div>
+                {rateChosen &&
+                    <div className="RateDescription">
+                        <span className="RateClass">Тариф "{rateClass.class}"</span>
+                        <span className="RateCars">
+                            {rateClass.cars.map((car, i) => {
+                                return (
+                                    <span key={i}>{car}</span>
+                                )
+                            })}
+                        </span>
+                        <span className="RateConditions">
+                            {rateClass.conditions.map((condition, i) => {
+                                return (
+                                    <span key={i}>{condition}</span>
+                                )
+                            })}
+                        </span>
+                    </div>
+                }
                 <button className="OrderTaxi">Заказать</button>
             </section>
             <div className="CarImage">
@@ -104,7 +298,17 @@ function App() {
             <section className="ContactsContainer">
                 <div className="InputContainer">
                     <span className="PreNum">+7&nbsp;</span>
-                    <input className="InputNumber" type="text" placeholder="(999) 999-99-99" />
+                    <input 
+                        className="InputNumber" 
+                        type="text" 
+                        maxLength="15" 
+                        value={phoneNumber}
+                        onChange={(e) => {
+                            handlePhoneChange(e)
+                        }}
+                        onKeyDown={handleBackspace}
+                        placeholder="(999) 999-99-99"
+                    />
                 </div>
                 <button className="GetCall">Заказать звонок</button>
                 <div className="MediaLinks">

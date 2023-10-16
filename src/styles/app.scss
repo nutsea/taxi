@@ -1,3 +1,7 @@
+.None {
+    display: none !important;
+}
+
 .App {
     width: calc(100vw - 20px);
     display: flex;
@@ -114,6 +118,29 @@
         .Chosen {
             background-color: rgb(255, 255, 255);
             color: #464646;
+        }
+    }
+
+    .RateDescription {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        color: rgb(200, 200, 200);
+        margin-bottom: 20px;
+
+        .RateClass {
+            font-weight: 600;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .RateCars {
+            margin-bottom: 5px;
+            font-size: 12px;
+        }
+
+        .RateConditions {
+            font-size: 12px;
         }
     }
 
