@@ -280,13 +280,11 @@ function App() {
                                 )
                             })}
                         </span>
-                        <span className="RateConditions">
-                            {rateClass.conditions.map((condition, i) => {
-                                return (
-                                    <span key={i}>{condition}</span>
-                                )
-                            })}
-                        </span>
+                        {rateClass.conditions.map((condition, i) => {
+                            return (
+                                <span key={i} className="RateConditions">{condition}</span>
+                            )
+                        })}
                     </div>
                 }
                 <button className="OrderTaxi">Заказать</button>
