@@ -13,6 +13,8 @@ import minivan from './images/minivan.png'
 import carShip from './images/carShip.png'
 import whatsapp from './images/whatsapp.png'
 import telegram from './images/telegram.png'
+import car2 from './images/car2.png'
+import car3 from './images/car3.png'
 
 function App() {
     const chooseRate = (e) => {
@@ -95,6 +97,10 @@ function App() {
                 </div>
                 <button className="OrderTaxi">Заказать</button>
             </section>
+            <div className="CarImage">
+                <img className="CarAbsolute1" src={car2} alt="Car" />
+                <img className="CarAbsolute2" src={car3} alt="Car" />
+            </div>
             <section className="ContactsContainer">
                 <div className="InputContainer">
                     <span className="PreNum">+7&nbsp;</span>
