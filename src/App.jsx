@@ -76,6 +76,11 @@ const classes = [
         cars: ['Lada Vesta, ', 'Lada Largus, ', 'Kia Rio, ', 'Skoda Rapid, ', 'Renault Logan, ', 'Hyundai Solaris'],
         conditions: ['В машине 4 места']
     },
+    {
+        class: 'Компактвэн',
+        cars: ['Lada Vesta, ', 'Lada Largus, ', 'Kia Rio, ', 'Skoda Rapid, ', 'Renault Logan, ', 'Hyundai Solaris'],
+        conditions: ['В машине 4 места']
+    }
 ]
 
 function App() {
@@ -335,57 +340,62 @@ function App() {
                         <button className="Rate Btn1" onClick={chooseRate} id="1">
                             <img className="RateImg" id="1" src={carBlue} alt="Машина" />
                             <span className="RateName" id="1">Стандарт</span>
-                            <span className="RatePrice" id="1">от 99₽</span>
+                            <span className="RatePrice" id="1">от 25₽/км</span>
                         </button>
                         <button className="Rate Btn2" onClick={chooseRate} id="2">
                             <img className="RateImg" id="2" src={carBlue} alt="Машина" />
                             <span className="RateName" id="2">Комфорт</span>
-                            <span className="RatePrice" id="2">от 99₽</span>
+                            <span className="RatePrice" id="2">от 30₽/км</span>
                         </button>
                         <button className="Rate Btn3" onClick={chooseRate} id="3">
                             <img className="RateImg" id="3" src={carRed} alt="Машина" />
                             <span className="RateName" id="3">Комфорт+</span>
-                            <span className="RatePrice" id="3">от 99₽</span>
+                            <span className="RatePrice" id="3">от 33₽/км</span>
                         </button>
                         <button className="Rate Btn4" onClick={chooseRate} id="4">
                             <img className="RateImg" id="4" src={carDark} alt="Машина" />
                             <span className="RateName" id="4">Бизнес</span>
-                            <span className="RatePrice" id="4">от 99₽</span>
-                        </button>
-                        <button className="Rate Btn5" onClick={chooseRate} id="5">
-                            <img className="RateImg" id="5" src={minivan} alt="Машина" />
-                            <span className="RateName" id="5">Минивэн</span>
-                            <span className="RatePrice" id="5">от 99₽</span>
-                        </button>
-                        <button className="Rate Btn6" onClick={chooseRate} id="6">
-                            <img className="RateImg" id="6" src={bus} alt="Машина" />
-                            <span className="RateName" id="6">Бус-автобус</span>
-                            <span className="RatePrice" id="6">от 99₽</span>
-                        </button>
-                        <button className="Rate Btn7" onClick={chooseRate} id="7">
-                            <img className="RateImg" id="7" src={carShip} alt="Машина" />
-                            <span className="RateName" id="7">Перегон авто</span>
-                            <span className="RatePrice" id="7">от 99₽</span>
-                        </button>
-                        <button className="Rate Btn8" onClick={chooseRate} id="8">
-                            <img className="RateImg" id="8" src={carBlue} alt="Машина" />
-                            <span className="RateName" id="8">Трезвый водитель</span>
-                            <span className="RatePrice" id="8">от 99₽</span>
-                        </button>
-                        <button className="Rate Btn9" onClick={chooseRate} id="9">
-                            <img className="RateImg" id="9" src={ship} alt="Машина" />
-                            <span className="RateName" id="9">Доставка</span>
-                            <span className="RatePrice" id="9">от 99₽</span>
-                        </button>
-                        <button className="Rate Btn10" onClick={chooseRate} id="10">
-                            <img className="RateImg" id="10" src={moving} alt="Машина" />
-                            <span className="RateName" id="10">Мини переезд</span>
-                            <span className="RatePrice" id="10">от 99₽</span>
+                            <span className="RatePrice" id="4">от 50₽/км</span>
                         </button>
                         <button className="Rate Btn11" onClick={chooseRate} id="11">
                             <img className="RateImg" id="11" src={carBlue} alt="Машина" />
                             <span className="RateName" id="11">Детский</span>
-                            <span className="RatePrice" id="11">от 99₽</span>
+                            <span className="RatePrice" id="11">от 30₽/км</span>
+                        </button>
+                        <button className="Rate Btn12" onClick={chooseRate} id="12">
+                            <img className="RateImg" id="12" src={minivan} alt="Машина" />
+                            <span className="RateName" id="12">Компактвэн</span>
+                            <span className="RatePrice" id="12">от 35₽/км</span>
+                        </button>
+                        <button className="Rate Btn5" onClick={chooseRate} id="5">
+                            <img className="RateImg" id="5" src={minivan} alt="Машина" />
+                            <span className="RateName" id="5">Минивэн</span>
+                            <span className="RatePrice" id="5">от 45₽/км</span>
+                        </button>
+                        <button className="Rate Btn6" onClick={chooseRate} id="6">
+                            <img className="RateImg" id="6" src={bus} alt="Машина" />
+                            <span className="RateName" id="6">Бус-автобус</span>
+                            <span className="RatePrice" id="6">от 70₽/км</span>
+                        </button>
+                        <button className="Rate Btn7" onClick={chooseRate} id="7">
+                            <img className="RateImg" id="7" src={carShip} alt="Машина" />
+                            <span className="RateName" id="7">Перегон авто</span>
+                            <span className="RatePrice" id="7">от 28₽/км</span>
+                        </button>
+                        <button className="Rate Btn8" onClick={chooseRate} id="8">
+                            <img className="RateImg" id="8" src={carBlue} alt="Машина" />
+                            <span className="RateName" id="8">Трезвый водитель</span>
+                            <span className="RatePrice" id="8">от 30₽/км</span>
+                        </button>
+                        <button className="Rate Btn9" onClick={chooseRate} id="9">
+                            <img className="RateImg" id="9" src={ship} alt="Машина" />
+                            <span className="RateName" id="9">Доставка</span>
+                            <span className="RatePrice" id="9">от 25₽/км</span>
+                        </button>
+                        <button className="Rate Btn10" onClick={chooseRate} id="10">
+                            <img className="RateImg" id="10" src={moving} alt="Машина" />
+                            <span className="RateName" id="10">Мини переезд</span>
+                            <span className="RatePrice" id="10">от 30₽/км</span>
                         </button>
                     </div>
                     <button className="ScrollRight" onClick={scrollRight}><img src={scroll} alt="Scroll" /></button>
