@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import './styles/app.scss'
 import './styles/base.scss'
 
@@ -15,6 +16,8 @@ import whatsapp from './images/whatsapp.png'
 import telegram from './images/telegram.png'
 import car2 from './images/car2.png'
 import car3 from './images/car3.png'
+import arrow from './images/arrow.png'
+import { sendOrder, sendQuery } from "./http/botApi";
 
 const classes = [
     {
@@ -77,7 +80,18 @@ const classes = [
 function App() {
     const [rateClass, setRateClass] = useState(classes[0])
     const [rateChosen, setRateChosen] = useState(false)
-    const [phoneNumber, setPhoneNumber] = useState()
+    const [phoneNumber, setPhoneNumber] = useState('')
+    const [phoneNumber2, setPhoneNumber2] = useState('')
+    const [sendNumber, setSendNumber] = useState('')
+    const [sendNumber2, setSendNumber2] = useState('')
+    const [addressFrom, setAddressFrom] = useState('')
+    const [addressTo, setAddressTo] = useState('')
+    const [name, setName] = useState('')
+    const [rateNum, setRateNum] = useState(-1)
+    const [sendError, setSendError] = useState(false)
+    const [sendSuccess, setSendSuccess] = useState(false)
+    const [sendError2, setSendError2] = useState(false)
+    const [sendSuccess2, setSendSuccess2] = useState(false)
 
     const chooseRate = (e) => {
         const rates = document.getElementsByClassName('Rate')
@@ -88,17 +102,26 @@ function App() {
         btn.classList.add('Chosen')
         setRateClass(classes[Number(e.target.id) - 1])
         setRateChosen(true)
+        setRateNum(Number(e.target.id) - 1)
     }
 
     const handlePhoneChange = (e) => {
-        const input = e.target.value
-        const formattedNumber = formatPhoneNumber(input)
-        setPhoneNumber(formattedNumber)
+        const formattedNumber = formatPhoneNumber(e)
+        const cleaned = ('' + e.target.value).replace(/\D/g, '')
+        if (e.target.id === 'num1') {
+            setPhoneNumber(formattedNumber)
+            setSendNumber('7' + cleaned)
+        }
+        else {
+            setPhoneNumber2(formattedNumber)
+            setSendNumber2('7' + cleaned)
+        }
     }
 
-    const formatPhoneNumber = (input) => {
-        const cleaned = ('' + input).replace(/\D/g, '')
-        setPhoneNumber('7'+ cleaned)
+    const formatPhoneNumber = (e) => {
+        const cleaned = ('' + e.target.value).replace(/\D/g, '')
+        if (e.target.id === 'num1') setSendNumber('7' + cleaned)
+        else setSendNumber2('7' + cleaned)
         const match = cleaned.match(/^(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})$/)
         let formattedNumber
         switch (cleaned.length) {
@@ -139,7 +162,7 @@ function App() {
             default:
                 break
         }
-    
+
         return formattedNumber;
     }
 
@@ -152,40 +175,40 @@ function App() {
             let formattedNumber
             switch (cleaned.length) {
                 case 10:
-                    formattedNumber = !match ? '' : 
-                    `(${match[0]}${match[1]}${match[2]}) ${match[3]}${match[4]}${match[5]}-${match[6]}${match[7]}-${match[8]}`
+                    formattedNumber = !match ? '' :
+                        `(${match[0]}${match[1]}${match[2]}) ${match[3]}${match[4]}${match[5]}-${match[6]}${match[7]}-${match[8]}`
                     break
                 case 9:
-                    formattedNumber = !match ? '' : 
-                    `(${match[0]}${match[1]}${match[2]}) ${match[3]}${match[4]}${match[5]}-${match[6]}${match[7]}-`
+                    formattedNumber = !match ? '' :
+                        `(${match[0]}${match[1]}${match[2]}) ${match[3]}${match[4]}${match[5]}-${match[6]}${match[7]}-`
                     break
                 case 8:
-                    formattedNumber = !match ? '' : 
-                    `(${match[0]}${match[1]}${match[2]}) ${match[3]}${match[4]}${match[5]}-${match[6]}`
+                    formattedNumber = !match ? '' :
+                        `(${match[0]}${match[1]}${match[2]}) ${match[3]}${match[4]}${match[5]}-${match[6]}`
                     break
                 case 7:
-                    formattedNumber = !match ? '' : 
-                    `(${match[0]}${match[1]}${match[2]}) ${match[3]}${match[4]}${match[5]}-`
+                    formattedNumber = !match ? '' :
+                        `(${match[0]}${match[1]}${match[2]}) ${match[3]}${match[4]}${match[5]}-`
                     break
                 case 6:
-                    formattedNumber = !match ? '' : 
-                    `(${match[0]}${match[1]}${match[2]}) ${match[3]}${match[4]}`
+                    formattedNumber = !match ? '' :
+                        `(${match[0]}${match[1]}${match[2]}) ${match[3]}${match[4]}`
                     break
                 case 5:
-                    formattedNumber = !match ? '' : 
-                    `(${match[0]}${match[1]}${match[2]}) ${match[3]}`
+                    formattedNumber = !match ? '' :
+                        `(${match[0]}${match[1]}${match[2]}) ${match[3]}`
                     break
                 case 4:
-                    formattedNumber = !match ? '' : 
-                    `(${match[0]}${match[1]}${match[2]}) `
+                    formattedNumber = !match ? '' :
+                        `(${match[0]}${match[1]}${match[2]}) `
                     break
                 case 3:
-                    formattedNumber = !match ? '' : 
-                    `(${match[0]}${match[1]}`
+                    formattedNumber = !match ? '' :
+                        `(${match[0]}${match[1]}`
                     break
                 case 2:
-                    formattedNumber = !match ? '' : 
-                    `(${match[0]}`
+                    formattedNumber = !match ? '' :
+                        `(${match[0]}`
                     break
                 case 1:
                     formattedNumber = !match ? '' : ``
@@ -197,26 +220,83 @@ function App() {
                 default:
                     break
             }
-            setPhoneNumber(formattedNumber)
+            const newCleaned = ('7' + formattedNumber).replace(/\D/g, '')
+            if (e.target.id === 'num1') {
+                setPhoneNumber(formattedNumber)
+                setSendNumber(newCleaned)
+            }
+            else {
+                setPhoneNumber2(formattedNumber)
+                setSendNumber2(newCleaned)
+            }
+        }
+    }
+
+    const handleChangeAddressFrom = (e) => {
+        setAddressFrom(e.target.value)
+    }
+
+    const handleChangeAddressTo = (e) => {
+        setAddressTo(e.target.value)
+    }
+
+    const handleChangeName = (e) => {
+        setName(e.target.value)
+    }
+
+    const sendOrderToBot = async () => {
+        try {
+            if (addressFrom && addressTo && sendNumber.length === 11 && name && rateNum !== -1)
+            await sendOrder(addressFrom, addressTo, sendNumber, name, classes[rateNum].class)
+            setSendError(false)
+            setSendSuccess(true)
+        } catch (e) {
+            console.log(e)
+            setSendError(true)
+            setSendSuccess(false)
+        }
+    }
+
+    const sendNumberToBot = async () => {
+        try {
+            if (sendNumber2.length === 11)
+            await sendQuery(sendNumber2)
+            setSendError2(false)
+            setSendSuccess2(true)
+        } catch (e) {
+            console.log(e)
+            setSendError2(true)
+            setSendSuccess2(false)
         }
     }
 
     return (
         <div className="App">
-            {/* <span className="Background"></span> */}
             <section className="OrderContainer">
                 <img className="Logotype" src={logo} alt="ZAкаZ Вся РОССИЯ VеZёМ" />
                 <div className="InputContainer">
                     <span className="InputCircle CircBlue"></span>
-                    <input className="InputFrom" type="text" placeholder="Откуда" />
+                    <input
+                        className="InputTo"
+                        type="text"
+                        value={addressFrom}
+                        placeholder="Откуда"
+                        onChange={handleChangeAddressFrom}
+                    />
                 </div>
                 <div className="InputContainer">
                     <span className="InputCircle CircRed"></span>
-                    <input className="InputTo" type="text" placeholder="Куда" />
+                    <input
+                        className="InputTo"
+                        type="text"
+                        value={addressTo}
+                        placeholder="Куда"
+                        onChange={handleChangeAddressTo}
+                    />
                 </div>
                 <div className="Rates">
                     <button className="Rate Btn1" onClick={chooseRate} id="1">
-                        <img className="RateImg" id="1" src={carBlue} alt="Машина"/>
+                        <img className="RateImg" id="1" src={carBlue} alt="Машина" />
                         <span className="RateName" id="1">Стандарт</span>
                         <span className="RatePrice" id="1">от 99₽</span>
                     </button>
@@ -271,6 +351,9 @@ function App() {
                         <span className="RatePrice" id="11">от 99₽</span>
                     </button>
                 </div>
+                <div className="ArrowRight">
+                    <img src={arrow} alt="Стрелка" />
+                </div>
                 {rateChosen &&
                     <div className="RateDescription">
                         <span className="RateClass">Тариф "{rateClass.class}"</span>
@@ -288,19 +371,13 @@ function App() {
                         })}
                     </div>
                 }
-                <button className="OrderTaxi">Заказать</button>
-            </section>
-            <div className="CarImage">
-                <img className="CarAbsolute1" src={car2} alt="Car" />
-                <img className="CarAbsolute2" src={car3} alt="Car" />
-            </div>
-            <section className="ContactsContainer">
                 <div className="InputContainer">
                     <span className="PreNum">+7&nbsp;</span>
-                    <input 
-                        className="InputNumber" 
-                        type="text" 
-                        maxLength="15" 
+                    <input
+                        className="InputNumber"
+                        id="num1"
+                        type="text"
+                        maxLength="15"
                         value={phoneNumber}
                         onChange={(e) => {
                             handlePhoneChange(e)
@@ -309,13 +386,56 @@ function App() {
                         placeholder="(999) 999-99-99"
                     />
                 </div>
-                <button className="GetCall">Заказать звонок</button>
+                <div className="InputContainerName">
+                    <input
+                        className="InputName"
+                        type="text"
+                        value={name}
+                        placeholder="Имя"
+                        onChange={handleChangeName}
+                    />
+                </div>
+                <button className="OrderTaxi" onClick={sendOrderToBot}>Заказать</button>
+                {sendError &&
+                    <span className="SendError">Ошибка отправки!</span>
+                }
+                {sendSuccess &&
+                    <span className="SendSuccess">Успешно отправлено!</span>
+                }
+            </section>
+            <div className="CarImage">
+                <img className="CarAbsolute1" src={car2} alt="Car" />
+                <img className="CarAbsolute2" src={car3} alt="Car" />
+            </div>
+            <section className="ContactsContainer">
+                <div className="InputContainer">
+                    <span className="PreNum">+7&nbsp;</span>
+                    <input
+                        className="InputNumber"
+                        id="num2"
+                        type="text"
+                        maxLength="15"
+                        value={phoneNumber2}
+                        onChange={(e) => {
+                            handlePhoneChange(e)
+                        }}
+                        onKeyDown={handleBackspace}
+                        placeholder="(999) 999-99-99"
+                    />
+                </div>
+                <button className="GetCall" onClick={sendNumberToBot}>Заказать звонок</button>
+                {sendError2 &&
+                    <span className="SendError2">Ошибка отправки!</span>
+                }
+                {sendSuccess2 &&
+                    <span className="SendSuccess2">Успешно отправлено!</span>
+                }
                 <div className="MediaLinks">
                     <a href="https://wa.me/79515110167" target="_blank" rel="noreferrer" className="WhatsappLink">
                         <img className="MediaImg" src={whatsapp} alt="Whatsapp" />
                         <span className="MediaName">Whatsapp</span>
                     </a>
-                    <a href="https://t.me/79281655580" target="_blank" rel="noreferrer" className="TelegramLink">
+                    <a href="https://t.me/amigo761" target="_blank" rel="noreferrer" className="TelegramLink">
                         <img className="MediaImg" src={telegram} alt="Telegram" />
                         <span className="MediaName">Telegram</span>
                     </a>
