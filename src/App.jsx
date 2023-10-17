@@ -103,6 +103,7 @@ function App() {
         setRateClass(classes[Number(e.target.id) - 1])
         setRateChosen(true)
         setRateNum(Number(e.target.id) - 1)
+        document.querySelector('.ArrowRight').classList.remove('Empty')
     }
 
     const handlePhoneChange = (e) => {
@@ -111,10 +112,12 @@ function App() {
         if (e.target.id === 'num1') {
             setPhoneNumber(formattedNumber)
             setSendNumber('7' + cleaned)
+            if (cleaned.length === 10) document.querySelector('.PhoneOrder').classList.remove('Empty')
         }
         else {
             setPhoneNumber2(formattedNumber)
             setSendNumber2('7' + cleaned)
+            if (cleaned.length === 10) document.querySelector('.PhoneCall').classList.remove('Empty')
         }
     }
 
@@ -234,22 +237,32 @@ function App() {
 
     const handleChangeAddressFrom = (e) => {
         setAddressFrom(e.target.value)
+        document.querySelector('.AddressFrom').classList.remove('Empty')
     }
 
     const handleChangeAddressTo = (e) => {
         setAddressTo(e.target.value)
+        document.querySelector('.AddressTo').classList.remove('Empty')
     }
 
     const handleChangeName = (e) => {
         setName(e.target.value)
+        document.querySelector('.Name').classList.remove('Empty')
     }
 
     const sendOrderToBot = async () => {
         try {
-            if (addressFrom && addressTo && sendNumber.length === 11 && name && rateNum !== -1)
-            await sendOrder(addressFrom, addressTo, sendNumber, name, classes[rateNum].class)
-            setSendError(false)
-            setSendSuccess(true)
+            if (addressFrom && addressTo && sendNumber.length === 11 && name && rateNum !== -1) {
+                await sendOrder(addressFrom, addressTo, sendNumber, name, classes[rateNum].class)
+                setSendError(false)
+                setSendSuccess(true)
+            } else {
+                if (!addressFrom) document.querySelector('.AddressFrom').classList.add('Empty')
+                if (!addressTo) document.querySelector('.AddressTo').classList.add('Empty')
+                if (sendNumber.length !== 11) document.querySelector('.PhoneOrder').classList.add('Empty')
+                if (!name) document.querySelector('.Name').classList.add('Empty')
+                if (rateNum === -1) document.querySelector('.ArrowRight').classList.add('Empty')
+            }
         } catch (e) {
             console.log(e)
             setSendError(true)
@@ -259,10 +272,13 @@ function App() {
 
     const sendNumberToBot = async () => {
         try {
-            if (sendNumber2.length === 11)
-            await sendQuery(sendNumber2)
-            setSendError2(false)
-            setSendSuccess2(true)
+            if (sendNumber2.length === 11) {
+                await sendQuery(sendNumber2)
+                setSendError2(false)
+                setSendSuccess2(true)
+            } else {
+                document.querySelector('.PhoneCall').classList.add('Empty')
+            }
         } catch (e) {
             console.log(e)
             setSendError2(true)
@@ -284,6 +300,7 @@ function App() {
                         onChange={handleChangeAddressFrom}
                     />
                 </div>
+                <span className="AddressFrom">Введите адрес отправки</span>
                 <div className="InputContainer">
                     <span className="InputCircle CircRed"></span>
                     <input
@@ -294,6 +311,7 @@ function App() {
                         onChange={handleChangeAddressTo}
                     />
                 </div>
+                <span className="AddressTo">Введите адрес прибытия</span>
                 <div className="Rates">
                     <button className="Rate Btn1" onClick={chooseRate} id="1">
                         <img className="RateImg" id="1" src={carBlue} alt="Машина" />
@@ -352,6 +370,7 @@ function App() {
                     </button>
                 </div>
                 <div className="ArrowRight">
+                    <span className="RateEmpty">Выберите тариф</span>
                     <img src={arrow} alt="Стрелка" />
                 </div>
                 {rateChosen &&
@@ -386,6 +405,7 @@ function App() {
                         placeholder="(999) 999-99-99"
                     />
                 </div>
+                <span className="PhoneOrder">Некорректный номер телефона</span>
                 <div className="InputContainerName">
                     <input
                         className="InputName"
@@ -395,6 +415,7 @@ function App() {
                         onChange={handleChangeName}
                     />
                 </div>
+                <span className="Name">Введите имя</span>
                 <button className="OrderTaxi" onClick={sendOrderToBot}>Заказать</button>
                 {sendError &&
                     <span className="SendError">Ошибка отправки!</span>
@@ -423,6 +444,7 @@ function App() {
                         placeholder="(999) 999-99-99"
                     />
                 </div>
+                <span className="PhoneCall">Некорректный номер телефона</span>
                 <button className="GetCall" onClick={sendNumberToBot}>Заказать звонок</button>
                 {sendError2 &&
                     <span className="SendError2">Ошибка отправки!</span>
