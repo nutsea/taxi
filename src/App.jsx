@@ -16,7 +16,8 @@ import whatsapp from './images/whatsapp.png'
 import telegram from './images/telegram.png'
 import car2 from './images/car2.png'
 import car3 from './images/car3.png'
-import arrow from './images/arrow.png'
+import scroll from './images/scroll.png'
+
 import { sendOrder, sendQuery } from "./http/botApi";
 
 const classes = [
@@ -103,7 +104,7 @@ function App() {
         setRateClass(classes[Number(e.target.id) - 1])
         setRateChosen(true)
         setRateNum(Number(e.target.id) - 1)
-        document.querySelector('.ArrowRight').classList.remove('Empty')
+        document.querySelector('.RateEmpty').classList.remove('Empty')
     }
 
     const handlePhoneChange = (e) => {
@@ -261,7 +262,7 @@ function App() {
                 if (!addressTo) document.querySelector('.AddressTo').classList.add('Empty')
                 if (sendNumber.length !== 11) document.querySelector('.PhoneOrder').classList.add('Empty')
                 if (!name) document.querySelector('.Name').classList.add('Empty')
-                if (rateNum === -1) document.querySelector('.ArrowRight').classList.add('Empty')
+                if (rateNum === -1) document.querySelector('.RateEmpty').classList.add('Empty')
             }
         } catch (e) {
             console.log(e)
@@ -284,6 +285,22 @@ function App() {
             setSendError2(true)
             setSendSuccess2(false)
         }
+    }
+
+    const scrollLeft = () => {
+        const scroller = document.querySelector('.Rates')
+        scroller.scrollBy({
+            left: -200,
+            behavior: 'smooth'
+        })
+    }
+
+    const scrollRight = () => {
+        const scroller = document.querySelector('.Rates')
+        scroller.scrollBy({
+            left: 200,
+            behavior: 'smooth'
+        })
     }
 
     return (
@@ -312,67 +329,68 @@ function App() {
                     />
                 </div>
                 <span className="AddressTo">Введите адрес прибытия</span>
-                <div className="Rates">
-                    <button className="Rate Btn1" onClick={chooseRate} id="1">
-                        <img className="RateImg" id="1" src={carBlue} alt="Машина" />
-                        <span className="RateName" id="1">Стандарт</span>
-                        <span className="RatePrice" id="1">от 99₽</span>
-                    </button>
-                    <button className="Rate Btn2" onClick={chooseRate} id="2">
-                        <img className="RateImg" id="2" src={carBlue} alt="Машина" />
-                        <span className="RateName" id="2">Комфорт</span>
-                        <span className="RatePrice" id="2">от 99₽</span>
-                    </button>
-                    <button className="Rate Btn3" onClick={chooseRate} id="3">
-                        <img className="RateImg" id="3" src={carRed} alt="Машина" />
-                        <span className="RateName" id="3">Комфорт+</span>
-                        <span className="RatePrice" id="3">от 99₽</span>
-                    </button>
-                    <button className="Rate Btn4" onClick={chooseRate} id="4">
-                        <img className="RateImg" id="4" src={carDark} alt="Машина" />
-                        <span className="RateName" id="4">Бизнес</span>
-                        <span className="RatePrice" id="4">от 99₽</span>
-                    </button>
-                    <button className="Rate Btn5" onClick={chooseRate} id="5">
-                        <img className="RateImg" id="5" src={minivan} alt="Машина" />
-                        <span className="RateName" id="5">Минивэн</span>
-                        <span className="RatePrice" id="5">от 99₽</span>
-                    </button>
-                    <button className="Rate Btn6" onClick={chooseRate} id="6">
-                        <img className="RateImg" id="6" src={bus} alt="Машина" />
-                        <span className="RateName" id="6">Бус-автобус</span>
-                        <span className="RatePrice" id="6">от 99₽</span>
-                    </button>
-                    <button className="Rate Btn7" onClick={chooseRate} id="7">
-                        <img className="RateImg" id="7" src={carShip} alt="Машина" />
-                        <span className="RateName" id="7">Перегон авто</span>
-                        <span className="RatePrice" id="7">от 99₽</span>
-                    </button>
-                    <button className="Rate Btn8" onClick={chooseRate} id="8">
-                        <img className="RateImg" id="8" src={carBlue} alt="Машина" />
-                        <span className="RateName" id="8">Трезвый водитель</span>
-                        <span className="RatePrice" id="8">от 99₽</span>
-                    </button>
-                    <button className="Rate Btn9" onClick={chooseRate} id="9">
-                        <img className="RateImg" id="9" src={ship} alt="Машина" />
-                        <span className="RateName" id="9">Доставка</span>
-                        <span className="RatePrice" id="9">от 99₽</span>
-                    </button>
-                    <button className="Rate Btn10" onClick={chooseRate} id="10">
-                        <img className="RateImg" id="10" src={moving} alt="Машина" />
-                        <span className="RateName" id="10">Мини переезд</span>
-                        <span className="RatePrice" id="10">от 99₽</span>
-                    </button>
-                    <button className="Rate Btn11" onClick={chooseRate} id="11">
-                        <img className="RateImg" id="11" src={carBlue} alt="Машина" />
-                        <span className="RateName" id="11">Детский</span>
-                        <span className="RatePrice" id="11">от 99₽</span>
-                    </button>
+                <div className="RatesContainer">
+                    <button className="ScrollLeft" onClick={scrollLeft}><img src={scroll} alt="Scroll" /></button>
+                    <div className="Rates">
+                        <button className="Rate Btn1" onClick={chooseRate} id="1">
+                            <img className="RateImg" id="1" src={carBlue} alt="Машина" />
+                            <span className="RateName" id="1">Стандарт</span>
+                            <span className="RatePrice" id="1">от 99₽</span>
+                        </button>
+                        <button className="Rate Btn2" onClick={chooseRate} id="2">
+                            <img className="RateImg" id="2" src={carBlue} alt="Машина" />
+                            <span className="RateName" id="2">Комфорт</span>
+                            <span className="RatePrice" id="2">от 99₽</span>
+                        </button>
+                        <button className="Rate Btn3" onClick={chooseRate} id="3">
+                            <img className="RateImg" id="3" src={carRed} alt="Машина" />
+                            <span className="RateName" id="3">Комфорт+</span>
+                            <span className="RatePrice" id="3">от 99₽</span>
+                        </button>
+                        <button className="Rate Btn4" onClick={chooseRate} id="4">
+                            <img className="RateImg" id="4" src={carDark} alt="Машина" />
+                            <span className="RateName" id="4">Бизнес</span>
+                            <span className="RatePrice" id="4">от 99₽</span>
+                        </button>
+                        <button className="Rate Btn5" onClick={chooseRate} id="5">
+                            <img className="RateImg" id="5" src={minivan} alt="Машина" />
+                            <span className="RateName" id="5">Минивэн</span>
+                            <span className="RatePrice" id="5">от 99₽</span>
+                        </button>
+                        <button className="Rate Btn6" onClick={chooseRate} id="6">
+                            <img className="RateImg" id="6" src={bus} alt="Машина" />
+                            <span className="RateName" id="6">Бус-автобус</span>
+                            <span className="RatePrice" id="6">от 99₽</span>
+                        </button>
+                        <button className="Rate Btn7" onClick={chooseRate} id="7">
+                            <img className="RateImg" id="7" src={carShip} alt="Машина" />
+                            <span className="RateName" id="7">Перегон авто</span>
+                            <span className="RatePrice" id="7">от 99₽</span>
+                        </button>
+                        <button className="Rate Btn8" onClick={chooseRate} id="8">
+                            <img className="RateImg" id="8" src={carBlue} alt="Машина" />
+                            <span className="RateName" id="8">Трезвый водитель</span>
+                            <span className="RatePrice" id="8">от 99₽</span>
+                        </button>
+                        <button className="Rate Btn9" onClick={chooseRate} id="9">
+                            <img className="RateImg" id="9" src={ship} alt="Машина" />
+                            <span className="RateName" id="9">Доставка</span>
+                            <span className="RatePrice" id="9">от 99₽</span>
+                        </button>
+                        <button className="Rate Btn10" onClick={chooseRate} id="10">
+                            <img className="RateImg" id="10" src={moving} alt="Машина" />
+                            <span className="RateName" id="10">Мини переезд</span>
+                            <span className="RatePrice" id="10">от 99₽</span>
+                        </button>
+                        <button className="Rate Btn11" onClick={chooseRate} id="11">
+                            <img className="RateImg" id="11" src={carBlue} alt="Машина" />
+                            <span className="RateName" id="11">Детский</span>
+                            <span className="RatePrice" id="11">от 99₽</span>
+                        </button>
+                    </div>
+                    <button className="ScrollRight" onClick={scrollRight}><img src={scroll} alt="Scroll" /></button>
                 </div>
-                <div className="ArrowRight">
-                    <span className="RateEmpty">Выберите тариф</span>
-                    <img src={arrow} alt="Стрелка" />
-                </div>
+                <span className="RateEmpty">Выберите тариф</span>
                 {rateChosen &&
                     <div className="RateDescription">
                         <span className="RateClass">Тариф "{rateClass.class}"</span>
