@@ -9,7 +9,7 @@
 .AddressFrom, .AddressTo, .PhoneOrder, .Name, .PhoneCall, .RateEmpty {
     display: none;
     width: 100%;
-    color: #B93631;
+    color: #FF0900;
     font-size: 12px;
     margin-top: 5px;
 }
@@ -41,8 +41,38 @@
     align-items: center;
     padding: 20px;
 
-    .Logotype {
-        width: 150px;
+
+    .Logo {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+
+        .Star {
+            height: 100px;
+            animation-name: spin;
+            animation-duration: 3s;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+        }
+
+        .Logotype {
+            height: 71px;
+            width: 150px;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotateY(0deg);
+            }
+            50% {
+                transform: rotateY(180deg);
+            }
+            100% {
+                transform: rotateY(360deg);
+            }
+        }
     }
 
     .InputContainer {
@@ -71,11 +101,11 @@
         }
 
         .CircBlue::before {
-            background-color: #3E33B9;
+            background-color: #1500FF;
         }
 
         .CircRed::before {
-            background-color: #B93631;
+            background-color: #FF0900;
         }
 
         .InputFrom, .InputTo {
@@ -250,7 +280,7 @@
         width: 100%;
         height: 50px;
         border-radius: 10px;
-        background-color: #B93631;
+        background-color: #FF0900;
         display: flex;
         flex-direction: row;
         justify-content: center;
@@ -263,7 +293,7 @@
 
     .SendError {
         margin-top: 20px;
-        color: #B93631;
+        color: #FF0900;
     }
 
     .SendSuccess {
@@ -347,7 +377,7 @@
 
     .SendError2 {
         margin-top: 20px;
-        color: #B93631;
+        color: #FF0900;
     }
 
     .SendSuccess2 {

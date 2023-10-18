@@ -17,6 +17,7 @@ import telegram from './images/telegram.png'
 import car2 from './images/car2.png'
 import car3 from './images/car3.png'
 import scroll from './images/scroll.png'
+import star from './images/star.png'
 
 import { sendOrder, sendQuery } from "./http/botApi";
 
@@ -52,7 +53,7 @@ const classes = [
         conditions: ['В машине 4 места']
     },
     {
-        class: 'Перегон авто',
+        class: 'Эвакуатор',
         cars: ['Lada Vesta, ', 'Lada Largus, ', 'Kia Rio, ', 'Skoda Rapid, ', 'Renault Logan, ', 'Hyundai Solaris'],
         conditions: ['В машине 4 места']
     },
@@ -78,6 +79,11 @@ const classes = [
     },
     {
         class: 'Компактвэн',
+        cars: ['Lada Vesta, ', 'Lada Largus, ', 'Kia Rio, ', 'Skoda Rapid, ', 'Renault Logan, ', 'Hyundai Solaris'],
+        conditions: ['В машине 4 места']
+    },
+    {
+        class: 'Перегон авто',
         cars: ['Lada Vesta, ', 'Lada Largus, ', 'Kia Rio, ', 'Skoda Rapid, ', 'Renault Logan, ', 'Hyundai Solaris'],
         conditions: ['В машине 4 места']
     }
@@ -311,7 +317,11 @@ function App() {
     return (
         <div className="App">
             <section className="OrderContainer">
-                <img className="Logotype" src={logo} alt="ZAкаZ Вся РОССИЯ VеZёМ" />
+                <div className="Logo">
+                    <img className="Star" src={star} alt="Star" />
+                    <img className="Logotype" src={logo} alt="ZAкаZ Вся РОССИЯ VеZёМ" />
+                    <img className="Star" src={star} alt="Star" />
+                </div>
                 <div className="InputContainer">
                     <span className="InputCircle CircBlue"></span>
                     <input
@@ -377,9 +387,14 @@ function App() {
                             <span className="RateName" id="9">Доставка</span>
                             <span className="RatePrice" id="9">от 25₽/км</span>
                         </button>
+                        <button className="Rate Btn13" onClick={chooseRate} id="13">
+                            <img className="RateImg" id="13" src={carBlue} alt="Машина" />
+                            <span className="RateName" id="13">Перегон авто</span>
+                            <span className="RatePrice" id="13">от 28₽/км</span>
+                        </button>
                         <button className="Rate Btn7" onClick={chooseRate} id="7">
                             <img className="RateImg" id="7" src={carShip} alt="Машина" />
-                            <span className="RateName" id="7">Перегон авто</span>
+                            <span className="RateName" id="7">Эвакуатор</span>
                             <span className="RatePrice" id="7">от 28₽/км</span>
                         </button>
                         <button className="Rate Btn8" onClick={chooseRate} id="8">
