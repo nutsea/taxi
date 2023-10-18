@@ -395,7 +395,7 @@ function App() {
                         <button className="Rate Btn7" onClick={chooseRate} id="7">
                             <img className="RateImg" id="7" src={carShip} alt="Машина" />
                             <span className="RateName" id="7">Эвакуатор</span>
-                            <span className="RatePrice" id="7">от 28₽/км</span>
+                            <span className="RatePrice" id="7">от 50₽/км</span>
                         </button>
                         <button className="Rate Btn8" onClick={chooseRate} id="8">
                             <img className="RateImg" id="8" src={carBlue} alt="Машина" />
