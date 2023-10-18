@@ -263,38 +263,54 @@ function App() {
     }
 
     const sendOrderToBot = async () => {
-        try {
-            if (addressFrom && addressTo && sendNumber.length === 11 && name && rateNum !== -1) {
-                await sendOrder(addressFrom, addressTo, sendNumber, name, classes[rateNum].class)
-                setSendError(false)
-                setSendSuccess(true)
-            } else {
-                if (!addressFrom) document.querySelector('.AddressFrom').classList.add('Empty')
-                if (!addressTo) document.querySelector('.AddressTo').classList.add('Empty')
-                if (sendNumber.length !== 11) document.querySelector('.PhoneOrder').classList.add('Empty')
-                if (!name) document.querySelector('.Name').classList.add('Empty')
-                if (rateNum === -1) document.querySelector('.RateEmpty').classList.add('Empty')
+        let currentAttempt = 1
+        while (currentAttempt >= 10) {
+            try {
+                if (addressFrom && addressTo && sendNumber.length === 11 && name && rateNum !== -1) {
+                    await sendOrder(addressFrom, addressTo, sendNumber, name, classes[rateNum].class)
+                    setSendError(false)
+                    setSendSuccess(true)
+                } else {
+                    if (!addressFrom) document.querySelector('.AddressFrom').classList.add('Empty')
+                    if (!addressTo) document.querySelector('.AddressTo').classList.add('Empty')
+                    if (sendNumber.length !== 11) document.querySelector('.PhoneOrder').classList.add('Empty')
+                    if (!name) document.querySelector('.Name').classList.add('Empty')
+                    if (rateNum === -1) document.querySelector('.RateEmpty').classList.add('Empty')
+                }
+                break
+            } catch (e) {
+                console.log(e)
+                if (currentAttempt === 10) {
+                    setSendError(true)
+                    setSendSuccess(false)
+                    break
+                }
+                currentAttempt++
             }
-        } catch (e) {
-            console.log(e)
-            setSendError(true)
-            setSendSuccess(false)
         }
     }
 
     const sendNumberToBot = async () => {
-        try {
-            if (sendNumber2.length === 11) {
-                await sendQuery(sendNumber2)
-                setSendError2(false)
-                setSendSuccess2(true)
-            } else {
-                document.querySelector('.PhoneCall').classList.add('Empty')
+        let currentAttempt = 1
+        while (currentAttempt <= 10) {
+            try {
+                if (sendNumber2.length === 11) {
+                    await sendQuery(sendNumber2)
+                    setSendError2(false)
+                    setSendSuccess2(true)
+                } else {
+                    document.querySelector('.PhoneCall').classList.add('Empty')
+                }
+                break
+            } catch (e) {
+                console.log(e)
+                if (currentAttempt === 10) {
+                    setSendError2(true)
+                    setSendSuccess2(false)
+                    break
+                }
+                currentAttempt++
             }
-        } catch (e) {
-            console.log(e)
-            setSendError2(true)
-            setSendSuccess2(false)
         }
     }
 
