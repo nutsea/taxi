@@ -9,3 +9,8 @@ export const sendQuery = async (phone) => {
     const {data} = await $host.get('api/bot/call', {params: {phone}})
     return data
 }
+
+export const abstractQuery = async () => {
+    const {data} = await $host.get('api/bot/abstract')
+    return data
+}

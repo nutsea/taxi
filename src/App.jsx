@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import './styles/app.scss'
 import './styles/base.scss'
@@ -19,7 +19,7 @@ import car3 from './images/car3.png'
 import scroll from './images/scroll.png'
 import star from './images/star.png'
 
-import { sendOrder, sendQuery } from "./http/botApi";
+import { abstractQuery, sendOrder, sendQuery } from "./http/botApi";
 
 const classes = [
     {
@@ -263,54 +263,46 @@ function App() {
     }
 
     const sendOrderToBot = async () => {
-        let currentAttempt = 1
-        while (currentAttempt <= 10) {
-            try {
-                if (addressFrom && addressTo && sendNumber.length === 11 && name && rateNum !== -1) {
-                    await sendOrder(addressFrom, addressTo, sendNumber, name, classes[rateNum].class)
-                    setSendError(false)
-                    setSendSuccess(true)
-                } else {
-                    if (!addressFrom) document.querySelector('.AddressFrom').classList.add('Empty')
-                    if (!addressTo) document.querySelector('.AddressTo').classList.add('Empty')
-                    if (sendNumber.length !== 11) document.querySelector('.PhoneOrder').classList.add('Empty')
-                    if (!name) document.querySelector('.Name').classList.add('Empty')
-                    if (rateNum === -1) document.querySelector('.RateEmpty').classList.add('Empty')
-                }
-                break
-            } catch (e) {
-                console.log(e)
-                if (currentAttempt === 10) {
-                    setSendError(true)
-                    setSendSuccess(false)
-                    break
-                }
-                currentAttempt++
+        try {
+            if (addressFrom && addressTo && sendNumber.length === 11 && name && rateNum !== -1) {
+                await sendOrder(addressFrom, addressTo, sendNumber, name, classes[rateNum].class)
+                setSendError(false)
+                setSendSuccess(true)
+            } else {
+                if (!addressFrom) document.querySelector('.AddressFrom').classList.add('Empty')
+                if (!addressTo) document.querySelector('.AddressTo').classList.add('Empty')
+                if (sendNumber.length !== 11) document.querySelector('.PhoneOrder').classList.add('Empty')
+                if (!name) document.querySelector('.Name').classList.add('Empty')
+                if (rateNum === -1) document.querySelector('.RateEmpty').classList.add('Empty')
             }
+        } catch (e) {
+            console.log(e)
+            setSendError(true)
+            setSendSuccess(false)
         }
     }
 
     const sendNumberToBot = async () => {
-        let currentAttempt = 1
-        while (currentAttempt <= 10) {
-            try {
-                if (sendNumber2.length === 11) {
-                    await sendQuery(sendNumber2)
-                    setSendError2(false)
-                    setSendSuccess2(true)
-                } else {
-                    document.querySelector('.PhoneCall').classList.add('Empty')
-                }
-                break
-            } catch (e) {
-                console.log(e)
-                if (currentAttempt === 10) {
-                    setSendError2(true)
-                    setSendSuccess2(false)
-                    break
-                }
-                currentAttempt++
+        try {
+            if (sendNumber2.length === 11) {
+                await sendQuery(sendNumber2)
+                setSendError2(false)
+                setSendSuccess2(true)
+            } else {
+                document.querySelector('.PhoneCall').classList.add('Empty')
             }
+        } catch (e) {
+            console.log(e)
+            setSendError2(true)
+            setSendSuccess2(false)
+        }
+    }
+
+    const query = async () => {
+        try {
+            await abstractQuery().then(data => console.log(data))
+        } catch (e) {
+
         }
     }
 
@@ -329,6 +321,12 @@ function App() {
             behavior: 'smooth'
         })
     }
+
+    useEffect(() => {
+        setInterval(() => {
+            query()
+        }, 5000)
+    })
 
     return (
         <div className="App">
