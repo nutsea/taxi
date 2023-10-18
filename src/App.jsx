@@ -264,7 +264,7 @@ function App() {
 
     const sendOrderToBot = async () => {
         let currentAttempt = 1
-        while (currentAttempt >= 10) {
+        while (currentAttempt <= 10) {
             try {
                 if (addressFrom && addressTo && sendNumber.length === 11 && name && rateNum !== -1) {
                     await sendOrder(addressFrom, addressTo, sendNumber, name, classes[rateNum].class)
