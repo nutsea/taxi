@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import './styles/app.scss'
 import './styles/base.scss'
@@ -19,7 +19,7 @@ import car3 from './images/car3.png'
 import scroll from './images/scroll.png'
 import star from './images/star.png'
 
-import { abstractQuery, sendOrder, sendQuery } from "./http/botApi";
+import { sendOrder, sendQuery } from "./http/botApi";
 
 const classes = [
     {
@@ -298,14 +298,6 @@ function App() {
         }
     }
 
-    const query = async () => {
-        try {
-            await abstractQuery().then(data => console.log(data))
-        } catch (e) {
-
-        }
-    }
-
     const scrollLeft = () => {
         const scroller = document.querySelector('.Rates')
         scroller.scrollBy({
@@ -321,12 +313,6 @@ function App() {
             behavior: 'smooth'
         })
     }
-
-    useEffect(() => {
-        setInterval(() => {
-            query()
-        }, 5000)
-    })
 
     return (
         <div className="App">
