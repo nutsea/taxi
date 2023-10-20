@@ -64,8 +64,7 @@ const classes = [
     },
     {
         class: 'Доставка',
-        cars: ['От Lada Vesta'],
-        conditions: ['В машине 4 места']
+        cars: ['От Lada Vesta']
     },
     {
         class: 'Мини переезд',
@@ -426,7 +425,7 @@ function App() {
                                 )
                             })}
                         </span>
-                        {rateClass.conditions.map((condition, i) => {
+                        {rateClass.conditions && rateClass.conditions.map((condition, i) => {
                             return (
                                 <span key={i} className="RateConditions">{condition}</span>
                             )
