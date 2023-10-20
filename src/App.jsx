@@ -64,7 +64,7 @@ const classes = [
     },
     {
         class: 'Доставка',
-        cars: ['Lada Vesta, ', 'Lada Largus, ', 'Kia Rio, ', 'Skoda Rapid, ', 'Renault Logan, ', 'Hyundai Solaris'],
+        cars: ['От Lada Vesta'],
         conditions: ['В машине 4 места']
     },
     {
