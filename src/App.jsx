@@ -11,6 +11,7 @@ import bus from './images/bus.png'
 import ship from './images/ship.png'
 import moving from './images/moving.png'
 import minivan from './images/minivan.png'
+import minivanDark from './images/minivanDark.png'
 import carShip from './images/carShip.png'
 import whatsapp from './images/whatsapp.png'
 import telegram from './images/telegram.png'
@@ -84,6 +85,16 @@ const classes = [
     {
         class: 'Перегон авто',
         cars: ['Lada Vesta, ', 'Lada Largus, ', 'Kia Rio, ', 'Skoda Rapid, ', 'Renault Logan, ', 'Hyundai Solaris'],
+        conditions: ['В машине 4 места']
+    },
+    {
+        class: 'Минивэн-Бизнес',
+        cars: ['Mercedes-Benz V-Class, ', 'Hyundai Grand Starex, ', 'Toyota Alphard'],
+        conditions: ['В машине 6-8 мест', 'Все машины не старше 5 лет']
+    },
+    {
+        class: 'Премиум',
+        cars: ['Mercedes-Maybach, ', 'BMW Series 7, ', 'BMW X6, ', 'Porsche, ', 'Maserati'],
         conditions: ['В машине 4 места']
     }
 ]
@@ -371,10 +382,20 @@ function App() {
                             <span className="RateName" id="4">Бизнес</span>
                             <span className="RatePrice" id="4">от 60₽/км</span>
                         </button>
+                        <button className="Rate Btn15" onClick={chooseRate} id="15">
+                            <img className="RateImg" id="15" src={carDark} alt="Машина" />
+                            <span className="RateName" id="15">Премиум</span>
+                            <span className="RatePrice" id="15">от 150₽/км</span>
+                        </button>
                         <button className="Rate Btn5" onClick={chooseRate} id="5">
                             <img className="RateImg" id="5" src={minivan} alt="Машина" />
                             <span className="RateName" id="5">Минивэн</span>
                             <span className="RatePrice" id="5">от 45₽/км</span>
+                        </button>
+                        <button className="Rate Btn14" onClick={chooseRate} id="14">
+                            <img className="RateImg" id="14" src={minivanDark} alt="Машина" />
+                            <span className="RateName" id="14">Минивэн-Бизнес</span>
+                            <span className="RatePrice" id="14">от 60₽/км</span>
                         </button>
                         <button className="Rate Btn6" onClick={chooseRate} id="6">
                             <img className="RateImg" id="6" src={bus} alt="Машина" />
