@@ -29,23 +29,23 @@ const classes = [
     },
     {
         class: 'Комфорт',
-        cars: ['Lada Vesta, ', 'Lada Largus, ', 'Kia Rio, ', 'Skoda Rapid, ', 'Renault Logan, ', 'Hyundai Solaris'],
+        cars: ['От Kia Cerato'],
         conditions: ['В машине 4 места']
     },
     {
         class: 'Комфорт+',
-        cars: ['Lada Vesta, ', 'Lada Largus, ', 'Kia Rio, ', 'Skoda Rapid, ', 'Renault Logan, ', 'Hyundai Solaris'],
+        cars: ['Kia Optima, ', 'Hyundai Sonata, ', 'Kia K5'],
         conditions: ['В машине 4 места']
     },
     {
         class: 'Бизнес',
-        cars: ['Lada Vesta, ', 'Lada Largus, ', 'Kia Rio, ', 'Skoda Rapid, ', 'Renault Logan, ', 'Hyundai Solaris'],
+        cars: ['От Toyota Camry (70), ', 'Mercedes-Benz, ', 'BMW, ', 'Mercedes-Benz V-Class'],
         conditions: ['В машине 4 места']
     },
     {
         class: 'Минивэн',
-        cars: ['Lada Vesta, ', 'Lada Largus, ', 'Kia Rio, ', 'Skoda Rapid, ', 'Renault Logan, ', 'Hyundai Solaris'],
-        conditions: ['В машине 4 места']
+        cars: ['Hyundai Starex, ', 'Honda Elysion, ', 'Toyota Alphard, ', 'Nissan Serena'],
+        conditions: ['В машине 6-8 мест']
     },
     {
         class: 'Бус-автобус',
@@ -369,7 +369,7 @@ function App() {
                         <button className="Rate Btn4" onClick={chooseRate} id="4">
                             <img className="RateImg" id="4" src={carDark} alt="Машина" />
                             <span className="RateName" id="4">Бизнес</span>
-                            <span className="RatePrice" id="4">от 50₽/км</span>
+                            <span className="RatePrice" id="4">от 60₽/км</span>
                         </button>
                         <button className="Rate Btn5" onClick={chooseRate} id="5">
                             <img className="RateImg" id="5" src={minivan} alt="Машина" />
