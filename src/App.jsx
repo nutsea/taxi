@@ -25,22 +25,22 @@ import { sendOrder, sendQuery } from "./http/botApi";
 const classes = [
     {
         class: 'Стандарт',
-        cars: ['Lada Vesta, ', 'Lada Largus, ', 'Kia Rio, ', 'Skoda Rapid, ', 'Renault Logan, ', 'Hyundai Solaris'],
+        cars: ['Lada Vesta, ', 'Kia Rio, ', 'Skoda Rapid, ', 'Renault Logan, ', 'Hyundai Solaris'],
         conditions: ['В машине 4 места']
     },
     {
         class: 'Комфорт',
-        cars: ['От Kia Cerato'],
+        cars: ['Kia Cerato, ', 'Skoda Octavia'],
         conditions: ['В машине 4 места']
     },
     {
         class: 'Комфорт+',
-        cars: ['Kia Optima, ', 'Hyundai Sonata, ', 'Kia K5'],
+        cars: ['Kia Optima, ', 'Kia K5, ', 'Toyota Camry'],
         conditions: ['В машине 4 места']
     },
     {
         class: 'Бизнес',
-        cars: ['От Toyota Camry (70), ', 'Mercedes-Benz, ', 'BMW, ', 'Mercedes-Benz V-Class'],
+        cars: ['Mercedes-Benz E-Class ', 'Audi A6, ', 'BMW 5 ', 'Mercedes-Benz V-Class'],
         conditions: ['В машине 4 места']
     },
     {
@@ -51,12 +51,11 @@ const classes = [
     {
         class: 'Бус-автобус',
         cars: ['Lada Vesta, ', 'Lada Largus, ', 'Kia Rio, ', 'Skoda Rapid, ', 'Renault Logan, ', 'Hyundai Solaris'],
-        conditions: ['В машине 4 места']
+        conditions: ['В машине от 10 мест']
     },
     {
         class: 'Эвакуатор',
-        cars: ['Lada Vesta, ', 'Lada Largus, ', 'Kia Rio, ', 'Skoda Rapid, ', 'Renault Logan, ', 'Hyundai Solaris'],
-        conditions: ['В машине 4 места']
+        cars: ['Lada Vesta, ', 'Kia Rio, ', 'Skoda Rapid, ', 'Renault Logan, ', 'Hyundai Solaris']
     },
     {
         class: 'Трезвый водитель',
@@ -69,23 +68,21 @@ const classes = [
     },
     {
         class: 'Мини переезд',
-        cars: ['Lada Vesta, ', 'Lada Largus, ', 'Kia Rio, ', 'Skoda Rapid, ', 'Renault Logan, ', 'Hyundai Solaris'],
-        conditions: ['В машине 4 места']
+        cars: ['Lada Vesta, ', 'Kia Rio, ', 'Skoda Rapid, ', 'Renault Logan, ', 'Hyundai Solaris']
     },
     {
         class: 'Детский',
-        cars: ['Lada Vesta, ', 'Lada Largus, ', 'Kia Rio, ', 'Skoda Rapid, ', 'Renault Logan, ', 'Hyundai Solaris'],
-        conditions: ['В машине 4 места']
+        cars: ['Lada Vesta, ', 'Kia Rio, ', 'Skoda Rapid, ', 'Renault Logan, ', 'Hyundai Solaris, ', 'Kia Cerato, ', 'Skoda Octavia'],
+        conditions: ['В машине 4 места', 'У водителей есть детские кресла и бустеры']
     },
     {
         class: 'Компактвэн',
-        cars: ['Lada Vesta, ', 'Lada Largus, ', 'Kia Rio, ', 'Skoda Rapid, ', 'Renault Logan, ', 'Hyundai Solaris'],
-        conditions: ['В машине 4 места']
+        cars: ['Volkswagen Caddy, ', 'Citroen C4 Picasso, ', 'Ford Galaxy'],
+        conditions: ['В машине 6 мест']
     },
     {
         class: 'Перегон авто',
-        cars: ['Lada Vesta, ', 'Lada Largus, ', 'Kia Rio, ', 'Skoda Rapid, ', 'Renault Logan, ', 'Hyundai Solaris'],
-        conditions: ['В машине 4 места']
+        cars: ['Lada Vesta, ', 'Kia Rio, ', 'Skoda Rapid, ', 'Renault Logan, ', 'Hyundai Solaris']
     },
     {
         class: 'Минивэн-Бизнес',
@@ -370,12 +367,12 @@ function App() {
                         <button className="Rate Btn3" onClick={chooseRate} id="3">
                             <img className="RateImg" id="3" src={carRed} alt="Машина" />
                             <span className="RateName" id="3">Комфорт+</span>
-                            <span className="RatePrice" id="3">от 33₽/км</span>
+                            <span className="RatePrice" id="3">от 35₽/км</span>
                         </button>
                         <button className="Rate Btn11" onClick={chooseRate} id="11">
                             <img className="RateImg" id="11" src={carBlue} alt="Машина" />
                             <span className="RateName" id="11">Детский</span>
-                            <span className="RatePrice" id="11">от 30₽/км</span>
+                            <span className="RatePrice" id="11">от 33₽/км</span>
                         </button>
                         <button className="Rate Btn4" onClick={chooseRate} id="4">
                             <img className="RateImg" id="4" src={carDark} alt="Машина" />
@@ -430,7 +427,7 @@ function App() {
                         <button className="Rate Btn12" onClick={chooseRate} id="12">
                             <img className="RateImg" id="12" src={minivan} alt="Машина" />
                             <span className="RateName" id="12">Компактвэн</span>
-                            <span className="RatePrice" id="12">от 35₽/км</span>
+                            <span className="RatePrice" id="12">от 37₽/км</span>
                         </button>
                     </div>
                     <button className="ScrollRight" onClick={scrollRight}><img src={scroll} alt="Scroll" /></button>
@@ -440,7 +437,7 @@ function App() {
                     <div className="RateDescription">
                         <span className="RateClass">Тариф "{rateClass.class}"</span>
                         <span className="RateCars">
-                            {rateClass.cars.map((car, i) => {
+                            {rateClass.cars && rateClass.cars.map((car, i) => {
                                 return (
                                     <span key={i}>{car}</span>
                                 )
