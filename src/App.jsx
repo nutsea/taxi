@@ -40,7 +40,7 @@ const classes = [
     },
     {
         class: 'Бизнес',
-        cars: ['Mercedes-Benz E-Class ', 'Audi A6, ', 'BMW 5 ', 'Mercedes-Benz V-Class'],
+        cars: ['Mercedes-Benz E-Class, ', 'Audi A6, ', 'BMW 5 ', 'Mercedes-Benz V-Class'],
         conditions: ['В машине 4 места']
     },
     {
@@ -55,7 +55,7 @@ const classes = [
     },
     {
         class: 'Эвакуатор',
-        cars: ['Lada Vesta, ', 'Kia Rio, ', 'Skoda Rapid, ', 'Renault Logan, ', 'Hyundai Solaris']
+        cars: ['Газель, ', 'Hyundai']
     },
     {
         class: 'Трезвый водитель',
@@ -384,6 +384,11 @@ function App() {
                             <span className="RateName" id="15">Премиум</span>
                             <span className="RatePrice" id="15">от 150₽/км</span>
                         </button>
+                        <button className="Rate Btn12" onClick={chooseRate} id="12">
+                            <img className="RateImg" id="12" src={minivan} alt="Машина" />
+                            <span className="RateName" id="12">Компактвэн</span>
+                            <span className="RatePrice" id="12">от 37₽/км</span>
+                        </button>
                         <button className="Rate Btn5" onClick={chooseRate} id="5">
                             <img className="RateImg" id="5" src={minivan} alt="Машина" />
                             <span className="RateName" id="5">Минивэн</span>
@@ -423,11 +428,6 @@ function App() {
                             <img className="RateImg" id="10" src={moving} alt="Машина" />
                             <span className="RateName" id="10">Мини переезд</span>
                             <span className="RatePrice" id="10">от 30₽/км</span>
-                        </button>
-                        <button className="Rate Btn12" onClick={chooseRate} id="12">
-                            <img className="RateImg" id="12" src={minivan} alt="Машина" />
-                            <span className="RateName" id="12">Компактвэн</span>
-                            <span className="RatePrice" id="12">от 37₽/км</span>
                         </button>
                     </div>
                     <button className="ScrollRight" onClick={scrollRight}><img src={scroll} alt="Scroll" /></button>
