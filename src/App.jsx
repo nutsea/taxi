@@ -64,7 +64,7 @@ const classes = [
     },
     {
         class: 'Доставка',
-        cars: ['От Lada Vesta']
+        cars: ['Lada Vesta']
     },
     {
         class: 'Мини переезд',
