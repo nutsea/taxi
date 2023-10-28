@@ -25,7 +25,7 @@ import { sendOrder, sendQuery } from "./http/botApi";
 const classes = [
     {
         class: 'Стандарт',
-        cars: ['Lada Vesta, ', 'Kia Rio, ', 'Skoda Rapid, ', 'Renault Logan, ', 'Hyundai Solaris'],
+        cars: ['Lada Vesta, ', 'Kia Rio, ', 'Skoda Rapid, ', 'Renault Logan, ', 'Hyundai Solaris, ', 'Volkswagen Polo'],
         conditions: ['В машине 4 места']
     },
     {
@@ -50,7 +50,7 @@ const classes = [
     },
     {
         class: 'Бус-автобус',
-        cars: ['Lada Vesta, ', 'Lada Largus, ', 'Kia Rio, ', 'Skoda Rapid, ', 'Renault Logan, ', 'Hyundai Solaris'],
+        cars: ['Mercedes-Benz Sprinter'],
         conditions: ['В машине от 10 мест']
     },
     {
@@ -59,7 +59,6 @@ const classes = [
     },
     {
         class: 'Трезвый водитель',
-        cars: ['Lada Vesta, ', 'Lada Largus, ', 'Kia Rio, ', 'Skoda Rapid, ', 'Renault Logan, ', 'Hyundai Solaris'],
         conditions: ['В машине 4 места']
     },
     {
@@ -67,13 +66,12 @@ const classes = [
         cars: ['Lada Vesta']
     },
     {
-        class: 'Мини переезд',
-        cars: ['Lada Vesta, ', 'Kia Rio, ', 'Skoda Rapid, ', 'Renault Logan, ', 'Hyundai Solaris']
+        class: 'Мини переезд'
     },
     {
         class: 'Детский',
         cars: ['Lada Vesta, ', 'Kia Rio, ', 'Skoda Rapid, ', 'Renault Logan, ', 'Hyundai Solaris, ', 'Kia Cerato, ', 'Skoda Octavia'],
-        conditions: ['В машине 4 места', 'У водителей есть детские кресла и бустеры']
+        conditions: ['В машине 4 места', 'У водителя есть детское кресло и бустер']
     },
     {
         class: 'Компактвэн',
@@ -81,8 +79,7 @@ const classes = [
         conditions: ['В машине 6 мест']
     },
     {
-        class: 'Перегон авто',
-        cars: ['Lada Vesta, ', 'Kia Rio, ', 'Skoda Rapid, ', 'Renault Logan, ', 'Hyundai Solaris']
+        class: 'Перегон авто'
     },
     {
         class: 'Минивэн-Бизнес',
