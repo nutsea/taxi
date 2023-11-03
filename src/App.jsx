@@ -70,7 +70,7 @@ const classes = [
     },
     {
         class: 'Детский',
-        cars: ['Lada Vesta, ', 'Kia Rio, ', 'Skoda Rapid, ', 'Renault Logan, ', 'Hyundai Solaris, ', 'Kia Cerato, ', 'Skoda Octavia'],
+        cars: ['Lada Vesta, ', 'Kia Rio, ', 'Skoda Rapid, ', 'Renault Logan, ', 'Hyundai Solaris, ', 'Volkswagen Polo, ', 'Kia Cerato, ', 'Skoda Octavia'],
         conditions: ['В машине 4 места', 'У водителя есть детское кресло и бустер']
     },
     {
