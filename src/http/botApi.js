@@ -17,7 +17,7 @@ export const sendOrder = async (from, to, phone, name, rate) => {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            chat_id: '525881782', // ID чата, куда отправляешь сообщение
+            chat_id: '953061764', // ID чата, куда отправляешь сообщение
             text: `ЗАКАЗ\nИмя: ${name}\nНомер: +${phone}\nОткуда: ${from}\nКуда: ${to}\nТариф: ${rate}`
         }),
     })
@@ -37,7 +37,7 @@ export const sendQuery = async (phone) => {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            chat_id: '525881782',
+            chat_id: '953061764',
             text: `ЗАЯВКА НА ЗВОНОК\nНомер: +${phone}`
         }),
     })
